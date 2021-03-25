@@ -1,0 +1,34 @@
+<view class="cu-modal {{(show&&!bottom)?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">{{title}}</view>
+      <view class="action" bindtap="hidemodal">
+        <text class="cuIcon-close text-main"></text>
+      </view>
+    </view>
+    <view class="padding">
+      <slot class="bg-white" name="content"></slot>
+    </view>
+    <view class="cu-bar bg-white">
+      <view wx:if="{{showCancel}}" class="action margin-0 flex-sub text-main solid-left" bindtap="hidemodal">
+        {{cancelText}}
+      </view>
+      <view class="action margin-0 flex-sub  solid-left" bindtap="confirm">{{confirmText}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="cu-modal bottom-modal {{(show&&bottom)?'show':''}}" style="bottom:{{marginBottom}}px;">
+  <view class="cu-dialog">
+    <view class="flex bg-white">
+      <view class="flex-sub text-{{showCancel?'red':'grey'}} text-left padding" bindtap="hidemodal">
+        {{showCancel?cancelText:'Go'}}
+      </view>
+      <view class="flex-sub text-center text-main text-bold padding">{{title}}</view>
+      <view class="flex-sub text-main text-right padding" bindtap="confirm">{{confirmText}}</view>
+    </view>
+    <view class="padding">
+      <slot class="bg-white" name="content-bottom"></slot>
+    </view>
+  </view>
+</view>

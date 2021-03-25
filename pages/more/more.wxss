@@ -1,0 +1,81 @@
+/* pages/more/more.wxss */
+page {
+	height: 100%;
+	background-color: #ffffff;
+}
+/*轮播图*/
+.swiper{
+  margin-top: 10rpx;
+}
+.swiper-style{
+  display: flex;
+  width: 100%;
+  height:380rpx;
+}
+
+.swiper-item-style{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  overflow: unset;
+  width: 700rpx;
+  height: 450rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  box-sizing: border-box;
+}
+.swiper-image{
+  height: 380rpx;
+  width: 620rpx;
+  border-radius: 10rpx;
+  margin: 0rpx 50rpx ;
+  z-index: 1;
+  box-shadow: 0rpx 10rpx 10rpx 10rpx rgba(204, 152, 247, 0.1);
+  
+}
+/*工具栏*/
+.more{
+  width: 620rpx;
+  height: 900rpx;
+  margin: 0 auto;
+}
+.more-tool{
+  background: rgba(247, 241, 244, 0.1);
+  margin-top: 20rpx;
+  width: 620 rpx;
+  height: 200 rpx;
+  border-radius: 10rpx;
+  box-shadow: 0rpx 10rpx 10rpx 10rpx rgba(204, 152, 247, 0.1);
+}
+.more-tool .more-tool-title{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 40rpx;
+  color: rebeccapurple;
+  margin: 10rpx 10rpx ;
+}
+.more-tool .more-tool-content{
+  display: flex;  
+}
+.more-tool .more-tool-icon{
+  height: 110rpx;
+  width: 110rpx;
+  border-radius: 10rpx;
+  margin: 10rpx 40rpx ;
+  z-index: 1;
+  box-shadow: 0rpx 5rpx 5rpx 5rpx rgba(247, 161, 210, 0.1); 
+}
+.more-tool .more-tool-icon .more-tool-image{
+  height: 75rpx;
+  width: 75rpx; 
+  display:flex;                    
+  justify-content: center;
+  margin: 0 auto;
+}
+.more-tool .more-tool-text{
+  margin: 0 auto;
+  color: rebeccapurple;
+  font-size: 30rpx;
+  display:flex;                    
+  justify-content: center;
+}

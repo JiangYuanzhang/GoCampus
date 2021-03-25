@@ -1,0 +1,15 @@
+<view class="up">
+	<view class="tip">一卡通·余额</view>
+</view>
+<view class="card">{{money}}</view>
+<view class="options">
+	<view class="option1">
+		<text>消费明细</text>
+		<image src="/images/more-icons/guide.png"></image>
+	</view>
+	<view class="option2">
+		<text>历史充值</text> 
+		<image src="/images/more-icons/guide.png"></image>
+	</view>
+</view>
+<view class="down"></view>

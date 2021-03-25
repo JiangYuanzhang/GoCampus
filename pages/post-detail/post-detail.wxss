@@ -1,0 +1,323 @@
+/* 页面 */
+page {
+	height: 100%;
+	background-color: #ffffff;
+}
+
+/* 加载遮罩层 */
+.mask {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #ffffff;
+	z-index: 1000;
+	transition: opacity .5s;
+}
+
+/* 主容器 */
+.main {
+	padding-bottom: 55px;
+	min-height: 100%;
+	box-sizing: border-box;
+}
+
+/* 帖子样式 */
+.post {
+	padding: 40rpx;
+	box-sizing: border-box;
+}
+
+/* 发帖者 */
+.post .post-sender {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+}
+
+/* 发帖者头像 */
+.post .sender-avatar {
+	display: block;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+
+/* 发帖时间 */
+.post .post-sender .send-time {
+	color: #a9a9a9;
+	font-size: 12px;
+}
+
+/* 帖子内容 */
+.post .post-content {
+	padding-top: 10px;
+	color: #666666;
+	font-size: 14px;
+}
+
+/* 帖子图片列表 */
+.post .img-list {
+	margin-top: 10px;
+}
+
+.post .img-list::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.post .img-list image {
+	display: block;
+	float: left;
+	margin: 0 10rpx 10rpx 0;
+	border-radius: 10px;
+}
+
+/* 帖子版块 */
+.post .topic {
+	display: inline-block;
+	height: 24px;
+	line-height: 24px;
+	padding: 0 12px;
+	border-radius: 12px;
+	background-color: #eeeeee;
+	font-size: 12px;
+	color: #aaaaaa;
+	margin-top: 10px;
+}
+
+/* 评论列表 */
+.comments .title {
+	padding: 40rpx;
+	box-sizing: border-box;
+	font-size: 15px;
+}
+
+/* 无数据样式 */
+.comments .no-data {
+	width: 100%;
+	height: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: #a9a9a9;
+	font-size: 12px;
+}
+
+.comments .no-data image {
+	display: block;
+	width: 60px;
+	height: 60px;
+}
+
+/* 回复列表无更多数据样式 */
+.comment-list .no-more {
+	padding: 20px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	color: #a9a9a9;
+	font-size: 12px;
+}
+
+.comment-list .no-more image {
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin-right: 20px;
+}
+
+/* 评论项 */
+.comment {
+	padding: 20rpx 40rpx;
+	box-sizing: border-box;
+	transition: all .2s;
+}
+
+.comment.active {
+	background-color: #eee;
+}
+
+/* 回复者 */
+.comment .comment-sender {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-size: 15px;
+}
+
+/* 回复这头像 */
+.comment .sender-avatar {
+	display: block;
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+
+/* 回复时间 */
+.comment .comment-sender .send-time {
+	color: #a9a9a9;
+	font-size: 12px;
+}
+
+/* 回复内容 */
+.comment .comment-content {
+	padding-top: 10px;
+	color: #666666;
+	font-size: 14px;
+}
+
+/* 回复的图片列表 */
+.comment .img-list {
+	margin-top: 10px;
+}
+
+.comment .img-list::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.comment .img-list image {
+	display: block;
+	width: 216.6rpx;
+	height: 216.6rpx;
+	float: left;
+	margin: 0 10rpx 10rpx 0;
+	border-radius: 10px;
+}
+
+/* 删除按钮 */
+.comment .del-btn {
+	color: #ff5722;
+	font-size: 12px;
+	transition: opacity .3s;
+	margin-top: 10px;
+}
+
+.comment .del-btn.active {
+	opacity: 0.8;
+}
+
+/* 底部回复条 */
+.bar {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	background: #ffffff;
+}
+
+/* 底部回复条上边框 */
+.bar .bar-border {
+	background-color: rgba(0, 0, 0, 0.33);
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 1px;
+	transform: scaleY(0.3);
+}
+
+/* 回复选择的图片列表 */
+.bar .imgList {
+	width: 100%;
+	padding: 20rpx 40rpx;
+	box-sizing: border-box;
+	background-color: #f1f1f1;
+	white-space: nowrap;
+}
+
+.bar .imgList .img-item {
+	display: inline-block;
+	width: 160rpx;
+	height: 160rpx;
+	margin-right: 10px;
+	position: relative;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+/* 选择的图片 */
+.bar .imgList .img-item .img {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+/* 删除选择的图片按钮 */
+.bar .imgList .img-item .del-img-btn {
+	display: block;
+	width: 40rpx;
+	height: 40rpx;
+	background-color: rgba(0, 0, 0, 0.33);
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 100;
+}
+
+.bar .bar-wrapper {
+	height: 55px;
+	padding: 0 40rpx;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* 选择图片按钮 */
+.bar .img-selector {
+	padding: 6px;
+	border-radius: 4px;
+	transition: background-color .3s;
+}
+
+/* 选择图片按钮点击样式 */
+.bar .img-selector.active {
+	background-color: #eeeeee;
+}
+
+/* 选择图片按钮的图标 */
+.bar .img-selector image {
+	display: block;
+	width: 20px;
+	height: 20px;
+}
+
+/* 回复输入框 */
+.bar input {
+	width: 500rpx;
+	height: 35px;
+	line-height: 35px;
+	background-color: #f1f1f1;
+	border-radius: 4px;
+	font-size: 14px;
+	padding: 0 10px;
+	box-sizing: border-box;
+	color: #666666;
+}
+
+/* 发布按钮 */
+.bar .sub-btn {
+	display: block;
+	padding: 5px 8px;
+	color: #5134c2;
+	font-size: 14px;
+	transition: opacity .3s;
+}
+
+/* 发布按钮点击样式 */
+.bar .sub-btn.active {
+	opacity: 0.8;
+}

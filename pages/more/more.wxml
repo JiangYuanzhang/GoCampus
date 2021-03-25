@@ -1,0 +1,54 @@
+<!--pages/more/more.wxml-->
+<!--<text>pages/more/more.wxml</text>-->
+<!--轮播图-->
+<view class="swiper">
+<swiper class="swiper-style" autoplay="true" interval="3000"  indicator-dots="true" indicator-color='#8a8a8a' indicator-active-color='#333' previous-margin="30rpx"next-margin="70rpx" circular="true">
+<swiper-item class="swiper-item-style" wx:for="{{swiper}}" wx:key="cover">
+<image class='swiper-image' src='{{item.cover}}'></image>
+</swiper-item>
+</swiper>
+</view>
+<!--工具栏-->
+<view class="more">
+<view class="more-tool">
+<view class="more-tool-title">学习</view>
+<view class="more-tool-content" >
+<!--<view hover-class="none" bindtap="curriculum">
+  <view class="more-tool-icon" >
+	<image src="/images/more-icons/curriculum.png" class="more-tool-image"></image>
+  <view class="more-tool-text">课表</view>
+  </view>
+</view>-->
+<view hover-class="none" bindtap="grades">
+  <view class="more-tool-icon" >
+	<image src="/images/more-icons/grades.png" class="more-tool-image"></image>
+  <view class="more-tool-text">成绩</view>
+  </view>
+</view>
+</view>
+</view>
+<!--<view class="more-tool">
+<view class="more-tool-title">娱乐</view>
+<view class="more-tool-content" >
+<view hover-class="none" bindtap="calendar">
+  <view class="more-tool-icon" >
+	<image src="/images/more-icons/calendar.png" class="more-tool-image"></image>
+  <view class="more-tool-text">打卡</view>
+  </view>
+</view>
+</view>
+</view>-->
+<view class="more-tool">
+<view class="more-tool-title">生活</view>
+<view class="more-tool-content" >
+<view hover-class="none" bindtap="ecard">
+  <view class="more-tool-icon" >
+	<image src="/images/more-icons/ecard.png" class="more-tool-image"></image>
+  <view class="more-tool-text">一卡通</view>
+  </view>
+</view>
+</view>
+</view>
+</view>
+
+

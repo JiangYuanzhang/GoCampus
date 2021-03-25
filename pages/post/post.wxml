@@ -1,0 +1,45 @@
+<!-- 主内容区 -->
+<view class="main" bindtap="onFocus">
+	<!-- 版块选择 -->
+	<picker class="topic" range="{{page.topics}}" bindchange="selectTopic" catchtap="preventTap">
+		<view class="topic-wrapper">
+			<view class="topic-wrapper-inner">
+				<!-- 版块图标 -->
+				<image class="topic-icon" src="/images/qa/topic.png" style="margin-right: 10px"></image>
+				<!-- 版块内容 -->
+				<text>{{form.topic ? form.topic : '选择版块'}}</text>
+			</view>
+			<!-- 箭头图标 -->
+			<image class="topic-icon" src="/images/qa/pointer.png"></image>
+		</view>
+	</picker>
+	<!-- 分割线 -->
+	<view style="height: 1px; transform: scaleY(0.3); margin: 0 40rpx; background: rgba(0, 0, 0, 0.33)"></view>
+	<!-- 内容区 -->
+	<view class="content-wrapper">
+		<!-- 文本域 -->
+		<textarea placeholder="说出你的疑惑..." auto-height maxlength="250" focus="{{page.focus}}" bindinput="inputContent" show-confirm-bar="{{false}}" adjust-position="{{false}}"></textarea>
+		<!-- 待上传图片列表 -->
+		<view class="imgList" wx:if="{{form.imgList.length != 0}}">
+			<!-- 图片项 -->
+			<view class="img-item" wx:for="{{form.imgList}}" wx:key="index" style="{{(index+1) % 3 == 0 ? 'margin-right: 0' : ''}}">
+				<!-- 图片 -->
+				<image class="img" src="{{item}}" mode="aspectFill" data-url="{{item}}" data-urllist="{{form.imgList}}" catchtap="viewImage"></image>
+				<!-- 删除按钮 -->
+				<image class="del-img-btn" src="/images/qa/delete.png" data-index="{{index}}" catchtap="deleteImage"></image>
+			</view>
+		</view>
+	</view>
+</view>
+
+<!-- 底部操作栏 -->
+<view class="bottom-bar" style="bottom: {{page.barBottom}}px">
+	<view class="bar-wrapper">
+		<!-- 选择图片按钮 -->
+		<view class="img-selector" hover-class="active" bindtap="chooseImage">
+			<image class="img-selector-icon" src="/images/qa/img.png"></image>
+		</view>
+		<!-- 发布按钮 -->
+		<view class="sub-btn" hover-class="active" bindtap="post">发布</view>
+	</view>
+</view>

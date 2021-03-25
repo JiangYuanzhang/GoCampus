@@ -1,0 +1,86 @@
+/* 页面 */
+page {
+	background-color: #ffffff;
+	height: 100%;
+}
+
+/* 主容器 */
+.main {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 50px;
+	box-sizing: border-box;
+}
+
+/* 标题 */
+.title {
+	color: #191919;
+	text-align: center;
+	line-height: 24px;
+}
+
+/* 表单组 */
+.form-group {
+	width: 295px;
+	margin-top: 15px;
+}
+
+/* 标签 */
+.form-group .label {
+	color: #7f7f7f;
+	font-size: 13px;
+	margin-bottom: 6px;
+}
+
+/* 输入框 */
+.form-group .input {
+	height: 48px;
+	color: #7f7f7f;
+	background-color: #f7f7f7;
+	border-radius: 6px;
+	padding: 0 15px;
+	font-size: 15px;
+}
+
+/* 提交按钮 */
+.submit-btn {
+	width: 295px;
+	height: 48px;
+	line-height: 50px;
+	text-align: center;
+	color: #ffffff;
+	background-color: #5134c2;
+	border-radius: 6px;
+	margin-top: 20px;
+	transition: opacity .3s;
+	font-size: 15px;
+}
+
+/* 提交按钮点击样式 */
+.submit-btn.active {
+	opacity: 0.8;
+}
+
+.proto{
+	width: 295px;
+	display: flex;
+	justify-content: flex-end;
+	margin-top:10px;
+}
+.proto navigator{
+	font-size: 14px;
+	color:  #5134c2;
+	height: 15px;
+	width: 100px;
+	margin-top:20px
+}
+.protocol{
+	font-size: 14px;
+	margin-top:20px;
+}
+.protocol image{
+	width: 10px;
+	height: 10px;
+}

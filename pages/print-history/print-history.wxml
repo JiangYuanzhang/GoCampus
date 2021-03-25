@@ -1,0 +1,21 @@
+<view class="main">
+  <scroll-view class="list-wrapper" scroll-y>
+    <view wx:if="{{historyOrders[0]}}" class="cu-list menu">
+      <view bind:tap="tapOrderToDetail" data-taped="{{index}}" wx:for="{{historyOrders}}" wx:for-item="order" wx:index="index" wx:key="index" class="cu-item bg-white shadow padding radius margin animation-slide-{{index%2==0?'left':'right'}}">
+        <view class="content padding-top padding-bottom">
+          <view class="text-main bold long-text">{{order.shop_name}}</view>
+          <view class="margin-top-sm text-sm text-black">
+            创建时间 : {{order.time}}
+          </view>
+        </view>
+        <view class="action">
+          <view class="text-main text-bold text-lg">{{order.state}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="align-center no-data" style="height:100%">
+      <image src="/images/qa/no-data.png"></image>
+      <text>没有数据吗</text>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,262 @@
+/* 页面 */
+page {
+	height: 100%;
+	background-color: #ffffff;
+}
+
+/* 导航条样式 */
+.nav-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #ffffff;
+	z-index: 1000;
+}
+
+/* 菜单条 */
+.nav-bar .menu-bar {
+	padding: 0 40rpx 8px;
+	width: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+/* 发帖按钮 */
+.nav-bar .menu-bar .post-btn {
+	margin-right: 10px;
+	width: 26px;
+	height: 26px;
+	transition: opacity .3s;
+}
+
+/* 发帖按钮点击样式 */
+.nav-bar .menu-bar .post-btn.active {
+	opacity: 0.8;
+}
+
+.nav-bar .menu-bar .post-btn image {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+/* 搜索框 */
+.nav-bar .menu-bar .search-frame {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 400rpx;
+	border-radius: 6px;
+	padding: 0 8px;
+	box-sizing: border-box;
+	background-color: #f2f2f2;
+}
+
+/* 搜索图标 */
+.nav-bar .menu-bar .search-frame image {
+	display: block;
+	height: 12px;
+	width: 12px;
+}
+
+/* 搜索框文字 */
+.nav-bar .menu-bar .search-frame text {
+	color: #a9a9a9;
+	font-size: 13px;
+	padding-left: 8px;
+}
+
+/* 版块条 */
+.nav-bar .topic-bar {
+	display: block;
+	width: 100%;
+	white-space: nowrap;
+}
+
+/* 版块项 */
+.nav-bar .topic-bar .topic-item {
+	display: inline-block;
+	line-height: 40px;
+	width: 150rpx;
+	text-align: center;
+	color: #a9a9a9;
+	font-size: 14px;
+	position: relative;
+}
+
+/* 版块选中样式 */
+.nav-bar .topic-bar .topic-item.selected {
+	color: #5134c2;
+}
+
+/* 选中项下划线 */
+.scroll-line {
+	width: 100rpx;
+	height: 2px;
+	border-radius: 1px;
+	background-color: #5134c2;
+	position: absolute;
+	bottom: 0;
+	left: 25rpx;
+}
+
+/* 主内容区 */
+.main {
+	padding-bottom: 60px;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+/* 帖子列表无数据样式 */
+.post-list .no-data {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: #a9a9a9;
+	font-size: 12px;
+}
+
+.post-list .no-data image {
+	display: block;
+	width: 80px;
+	height: 80px;
+}
+
+/* 帖子列表无更多数据样式 */
+.post-list .no-more {
+	padding: 20px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	color: #a9a9a9;
+	font-size: 12px;
+}
+
+.post-list .no-more image {
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin-right: 20px;
+}
+
+/* 帖子样式 */
+.post {
+	padding: 40rpx;
+	box-sizing: border-box;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin-top: 20px;
+}
+
+/* 发帖者 */
+.post .post-sender {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+}
+
+/* 发帖者头像 */
+.post .sender-avatar {
+	display: block;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+
+/* 发帖时间 */
+.post .post-sender .send-time {
+	color: #a9a9a9;
+	font-size: 12px;
+}
+
+/* 帖子内容 */
+.post .post-content {
+	padding-top: 10px;
+	color: #666666;
+	font-size: 14px;
+}
+
+/* 帖子图片列表 */
+.post .img-list {
+	margin-top: 10px;
+}
+
+.post .img-list::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.post .img-list image {
+	display: block;
+	float: left;
+	margin: 0 10rpx 10rpx 0;
+	border-radius: 10px;
+}
+
+/* 帖子版块 */
+.post .topic {
+	display: inline-block;
+	height: 24px;
+	line-height: 24px;
+	padding: 0 12px;
+	border-radius: 12px;
+	background-color: #eeeeee;
+	font-size: 12px;
+	color: #aaaaaa;
+	margin-top: 10px;
+}
+
+/* 操作条 */
+.post .oper-bar {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-top: 10px;
+}
+
+/* 删除按钮 */
+.post .oper-bar .del-btn {
+	color: #ff5722;
+	font-size: 12px;
+	transition: opacity .3s;
+	margin-left: 10px;
+}
+
+.post .oper-bar .del-btn.active {
+	opacity: 0.8;
+}
+
+.post .oper-bar-wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	color: #666666;
+	font-size: 14px;
+}
+
+.post .oper-bar .oper-item {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-right: 15px;
+}
+
+.post .oper-bar .oper-item image {
+	display: block;
+	width: 16px;
+	height: 16px;
+	margin-right: 8px;
+}

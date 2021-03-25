@@ -1,0 +1,7 @@
+{
+  
+  "navigationBarTextStyle": "black",
+  "backgroundColorTop": "#5134c2",
+  "navigationBarTitleText": "课表",
+  "enablePullDownRefresh": true
+}

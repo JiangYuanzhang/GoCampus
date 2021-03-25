@@ -1,0 +1,3 @@
+<!--pages/print-order/print-order.wxml-->
+
+<web-view wx:if="{{printWebPageUrl}}" src="{{printWebPageUrl}}" bindmessage="handleWebviewMessage"></web-view>

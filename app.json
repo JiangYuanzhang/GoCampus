@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/question/question",
+    "pages/print/print",
+    "pages/more/more",
+    "pages/me/me",
+    "pages/bind/bind",
+    "pages/post/post",
+    "pages/post-detail/post-detail",
+    "pages/messages/messages",
+    "pages/curriculum/curriculum",
+    "pages/calendar/calendar",
+    "pages/ecard/ecard",
+    "pages/grades/grades",
+    "pages/posts-search/posts-search",
+    "pages/print-history/print-history",
+    "pages/my-posts/my-posts",
+    "pages/shop-home-page/shop-home-page",
+    "pages/print-order-commit/print-order-commit",
+    "pages/print-remote-upload-file/print-remote-upload-file",
+    "pages/about/about",
+    "pages/protocol/protocol"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#5134c2",
+    "list": [
+     
+      {
+        "pagePath": "pages/question/question",
+        "text": "答疑"
+      },
+      {
+        "pagePath": "pages/curriculum/curriculum",
+        "text": "课表"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "小程序将使用您的位置"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

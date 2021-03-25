@@ -1,0 +1,137 @@
+<!-- 主内容区 -->
+<view>
+  <!-- 店铺卡片 -->
+  <navigator url="../shop-home-page/shop-home-page?shop={{shop.name}}">
+    <view class="flex shadow-blur radius bg-purple light padding margin radius animation-scale-up" id="shop-card">
+      <view class="flex-sub text-center justify-center">
+        <view class="cu-avatar round" style="background-image:url({{shop.avatar?shop.avatar:'https://tva1.sinaimg.cn/large/007S8ZIlgy1gdz1mmcfd3j30rl0rbgnv.jpg'}})"></view>
+      </view>
+      <view class="flex-fifth">
+        <view class="text-main text-bold">{{shop.name}}</view>
+        <view class="text-sm text-black">{{shop.location}}</view>
+      </view>
+    </view>
+  </navigator>
+  <!-- 商品信息 -->
+  <view class="bg-white margin padding radius shadow animation-scale-up">
+    <view class="title text-center text-main">
+      <text class="cuIcon-cart"> 商品列表</text>
+    </view>
+    <!-- 商品条目列表 -->
+    <view wx:if="{{cartNum!=0}}" class="cu-list menu-avatar">
+      <view class="cu-item solids-bottom" wx:for="{{carts}}" wx:for-index="index" wx:key="index">
+        <!-- 商品图标 -->
+        <view class="cu-avatar round lg" style="background-image:url({{item.good.avatar?item.good.avatar:shop.avatar}});"></view>
+        <!-- 商品信息 -->
+        <view class="content">
+          <view class="text-main long-text">{{item.good.name}}</view>
+          <view class="text-gray text-sm flex">
+            <text class="text-cut">{{item.good.price}}元/{{item.good.unit}} × {{item.num}} {{item.good.unit}}</text>
+          </view>
+        </view>
+        <!-- 价格小计 -->
+        <view class="text-center">
+          <text class="text-main text-bold padding-right-sm">￥{{item.price}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="nodata padding">
+      <image class="nodata-image" src="/images/qa/no-data.png"></image>
+      <text>你还没有选任何商品哦</text>
+    </view>
+    <!-- 底部操作条 -->
+    <view class="bg-white">
+      <view class="padding text-right">
+        <text class="cuIcon-money padding-right-sm text-bold">合计：</text>
+        <text class="text-main">{{sumPrice}} 元</text>
+      </view>
+    </view>
+  </view>
+  <form bindsubmit="submitOrderForm">
+    <!-- 收件人信息 -->
+    <view class="bg-white shadow radius margin padding animation-scale-up">
+      <view class="title text-center text-main">
+        <text class="cuIcon-profile"> 联系信息</text>
+      </view>
+      <!-- 表单 -->
+      <view class="text-left">
+        <view class="flex padding-top">
+          <view class="flex-sub">
+            <view class="text-main text-bold cuIcon-home"> 姓名 </view>
+          </view>
+          <view class="flex-treble padding-left">
+            <input name="name" placeholder="请输入你的姓名" />
+          </view>
+        </view>
+        <view class="flex padding-top">
+          <view class="flex-sub">
+            <view class="text-main text-bold cuIcon-phone"> 手机号码 </view>
+          </view>
+          <view class="flex-treble padding-left">
+            <view class="flex">
+              <view class="flex-treble">
+                <input class="{{autoGeted?'text-main':''}}" style="{{autoGeted?'font-style:italic;':''}}" name="tel" value="{{phoneNumber}}" disabled="{{autoGeted}}" placeholder="请输入你的手机" />
+              </view>
+              <view class="flex-sub">
+                <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" size="mini" class="cu-btn round bg-purple light sm align-center">获取</button>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="flex padding-top">
+          <view class="flex-sub">
+            <view class="text-main text-bold cuIcon-location"> 地址 </view>
+          </view>
+          <view class="flex-treble padding-left">
+            <input name="location" placeholder="请输入你的地址" />
+          </view>
+        </view>
+        <!-- 预约时间 -->
+        <view class="flex padding-top">
+          <view class="flex-sub">
+            <view class="text-main text-bold cuIcon-calendar"> 预约日期 </view>
+          </view>
+          <view class="flex-treble padding-left">
+            <picker name="date" mode="date" value="{{date}}" start="2020-01-01" end="2021-12-01" bindchange="DateChange">
+              <view class="picker">
+                {{date}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="flex padding-top">
+          <view class="flex-sub">
+            <view class="text-main text-bold cuIcon-time"> 预约时间 </view>
+          </view>
+          <view class="flex-treble padding-left">
+            <picker name="time" value="{{timeSelected}}" range="{{shop.business_times}}" bindchange="TimeChange">
+              <view class="picker">
+                {{shop.business_times[timeSelected]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 提交按钮 -->
+    <view class="text-center margin animation-scale-up">
+      <button form-type="submit" class="cu-btn lg bg-main padding round">提交订单</button>
+    </view>
+  </form>
+  <!-- 成功/失败弹窗 -->
+  <modal show="{{commitComplete}}" show-cancel="{{false}}" confirm-text="我知道了" title="下单{{state?'成功':'失败'}}" bind:confirm="hidemodal" bind:hidemodal="hidemodal">
+    <view wx:if="{{state}}" class="bg-white text-center" slot="content">
+      <view class="flex">
+        <view class="flex-sub text-main text-bold">预计价格</view>
+        <view class="flex-treble">{{mayPrice}}元</view>
+      </view>
+      <view class="flex">
+        <view class="flex-sub text-main text-bold">订单编号</view>
+        <view class="flex-treble long-text">{{orderCode}}</view>
+      </view>
+    </view>
+    <view wx:else>
+      <text class="cuIcon-info"> 提交订单失败了。</text>
+    </view>
+  </modal>
+</view>

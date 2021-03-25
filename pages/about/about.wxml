@@ -1,0 +1,33 @@
+<!--pages/about/about.wxml-->
+<view>
+	<view class="about">
+		<view class="title"><text>关于应用</text></view>
+		<view class="content">
+    <text>Go校园是团队(名字不好起)参加2020年微信小程序设计大赛的作品。</text>
+    <view>旨在给同学们提供一款答疑解惑，社区交流，云上打印的小工具</view>
+    </view>
+	</view>
+	<view class="about">
+		<view class="title"><text>开发目的</text></view>
+		<view class="content">
+			<text>本应用旨在提供一个平台，方便同学们解决在日常生活学习中遇到的问题。</text>
+      <view>使用本小程序还可以方便同学在疫情期间打印资料，避免近距离接触，以及排队的困扰。</view>
+      <view>在小程序中，加入了部分教务功能，解决了平常同学们查课表难，查成绩难等问题</view>
+		</view>
+	</view>
+  <view class="about">
+		<view class="title"><text>信息安全</text></view>
+		<view class="content">
+			<text>由于团队成员均为湖北工业大学学生，增加社交，以及云打印模块需要使用到企业主体中的部分功能。所以本程序开发者企业认证主体使用的是湖北盛世恒通通信集团有限公司。</text>
+      <view>在小程序社交功能中需要实名认证，所以不可避免的需要在服务器中保存用户的学号，姓名等个人信息。</view>
+      <view>小程序的教务模板，主要基于服务器上的爬虫程序，为了保证不对学校网站的正常运行，团队可能会限制小程序的使用人数，如果由于爬虫程序对贵网站造成了影响，请及时与我联系，以便团队对部分功能进行下架处理</view>
+		</view>
+	</view>
+   <view class="about">
+		<view class="title"><text>致谢</text></view>
+		<view class="content">
+			<text>开发本应用过程中，使用到了如下开源项目，在此表示感谢。</text>
+      <view>ColorUi组件：https://github.com/weilanwl/ColorUI</view>
+		</view>
+	</view>
+</view>

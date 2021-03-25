@@ -1,0 +1,126 @@
+<view class="margin">
+  <!-- 订单页面详情 -->
+  <view class="title text-center padding margin-top margin-bottom-lg radius-lg bg-purple light animation-slide-top">
+    <!-- 商家头像 -->
+    <view class="flex">
+      <view class="flex-sub">
+        <view class="cu-avatar round lg" style="background-image:url({{orderInfo.shop_avatar?orderInfo.shop_avatar:'https://tva1.sinaimg.cn/large/007S8ZIlgy1gdz1mmcfd3j30rl0rbgnv.jpg'}})"></view>
+      </view>
+      <view class="flex-treble text-left">
+        <view class="text-main text-bold text-lg">{{orderInfo.shop_name}}</view>
+        <view class="margin-top-xs text-main">{{orderInfo.shop_location}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 订单状态 -->
+  <view class="title text-center padding margin-top margin-bottom-lg radius-lg bg-purple light animation-slide-top">
+    <view class="text-main text-xxl text-bold">{{orderInfo.state}}</view>
+    <view class="text-main margin-top-sm" wx:if="{{orderInfo.state_info}}">{{orderInfo.state_info}}</view>
+  </view>
+  <!-- 订单内的商品 -->
+  <view class="bg-white margin-top margin-bottom padding radius shadow animation-scale-up">
+    <view class="title text-center text-main">
+      <text class="cuIcon-cart"> 商品列表</text>
+    </view>
+    <!-- 商品条目列表 -->
+    <view wx:if="{{cart.carts.length!=0}}" class="cu-list menu-avatar">
+      <view class="cu-item solids-bottom" wx:for="{{cart.carts}}" wx:for-index="index" wx:key="index" bind:tap="tapGood" data-index="{{index}}">
+        <!-- 商品图标 -->
+        <view class="cu-avatar round lg" style="background-image:url({{item.avatar?item.avatar:shop.avatar}});"></view>
+        <!-- 商品信息 -->
+        <view class="content">
+          <view class="text-main long-text">{{item.name}}</view>
+          <view class="text-gray text-sm flex">
+            <text class="text-cut">{{item.price}}元/{{item.unit}} × {{item.num}} {{item.unit}}</text>
+          </view>
+        </view>
+        <!-- 价格小计 -->
+        <view class="text-center">
+          <text class="text-main text-bold padding-right-sm">￥{{item.price*item.num}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="nodata padding">
+      <image class="nodata-image" src="/images/qa/no-data.png"></image>
+      <text>你还没有选任何商品哦</text>
+    </view>
+    <!-- 底部操作条 -->
+    <view class="bg-white">
+      <view class="padding text-right">
+        <text class="cuIcon-money padding-right-sm text-bold">合计：</text>
+        <text class="text-main">{{cart.price}} 元</text>
+      </view>
+    </view>
+  </view>
+  <!-- 订单的其他内容 -->
+  <view class="margin-sm text-left animation-slide-bottom">
+
+    <view class="flex padding-top solids-top solids-bottom padding-bottom">
+      <view class="flex-sub text-main text-bold">订单编号:</view>
+      <view class="flex-treble text-black">
+        <text class="long-text">{{orderInfo.code}}</text>
+      </view>
+    </view>
+
+    <view class="flex margin-top solids-bottom padding-bottom">
+      <view class="flex-sub text-main text-bold">下单时间:</view>
+      <view class="flex-treble text-black">{{orderInfo.time}}</view>
+    </view>
+
+    <view class="flex margin-top solids-bottom padding-bottom">
+      <view class="flex-sub text-main text-bold">预定时间:</view>
+      <view class="flex-treble text-black">{{orderInfo.appointment_start_time}} 至 {{orderInfo.appointment_end_time}}</view>
+    </view>
+
+    <view class="flex margin-top solids-bottom padding-bottom">
+      <view class="flex-sub text-main text-bold">联系姓名:</view>
+      <view class="flex-treble text-black">{{orderInfo.receiver_name}}</view>
+    </view>
+
+    <view class="flex margin-top solids-bottom padding-bottom">
+      <view class="flex-sub text-main text-bold">手机号码:</view>
+      <view class="flex-treble text-black">{{orderInfo.receiver_phone_number}}</view>
+    </view>
+
+    <view class="flex margin-top solids-bottom padding-bottom">
+      <view class="flex-sub text-main text-bold">联系地址:</view>
+      <view class="flex-treble text-black">{{orderInfo.receiver_address}}</view>
+    </view>
+
+  </view>
+  <!-- 联系我们与取消订单 -->
+  <view class="text-center flex animation-slide-bottom">
+    <button class="cu-btn margin-sm lg bg-main round" open-type="contact">联系我们</button>
+    <button bindtap="{{canBeCanceled?'tapCancelOrder':'showCanNotCancel'}}" class="cu-btn margin-sm lg round bg-{{canBeCanceled?'main':'gray'}}">{{canBeCanceled?(showCancelForm?'隐藏取消订单':'取消订单'):'不可取消'}}</button>
+  </view>
+  <!-- 取消订单弹窗 -->
+  <modal show="{{showCancelForm}}" show-cancel="{{true}}" title="取消订单" confirm-text="残忍取消" cancel-text="我再想想" bind:hidemodal="tapCancelOrder" bind:confirm="cancelOrder">
+    <view slot="content" class="text-left bg-gray radius shadow padding">
+      <textarea wx:if="{{showCancelForm}}" placeholder="请输入取消订单的原因" bindinput="reasonInput"></textarea>
+    </view>
+  </modal>
+  <!-- 无法取消订单的提示弹窗 -->
+  <modal show="{{canNotCancelTips}}" show-cancel="{{false}}" title="订单不能取消" confirm-text="我知道了" bind:hidemodal="showCanNotCancel" bind:confirm="showCanNotCancel">
+    <view class="text-left text-sm text-bold" slot="content">
+      很抱歉，处于关闭状态下或者打印店已经打印的订单无法取消。
+    </view>
+  </modal>
+  <!-- 商品详情弹窗 -->
+  <modal show="{{showGoodDetail}}" bottom show-cancel="{{false}}" title="{{good.name}}" confirm-text="我知道了" bind:hidemodal="hideGoodDetail" bind:confirm="hideGoodDetail">
+    <view slot="content-bottom">
+      <image src="{{good.photo}}" style="height:250px;"/>
+      <!-- 个性化信息 -->
+      <view wx:if="{{good.other_params}}" class="margin shadow">
+        <view class="flex" wx:for="{{good.other_params}}" wx:for-index="name" wx:for-item="value">
+          <view class="flex-sub text-main cuIcon-info"> {{name}}</view>
+          <view class="flex-twice">{{good.other_params[name]}}</view>
+        </view>
+      </view>
+      <!-- 附件 -->
+      <view wx:if="{{good.file.file_name}}" class="flex margin radius">
+        <view class="flex-sub text-main cuIcon-file"> 附件</view>
+        <view class="flex-twice long-text">{{good.file.file_name}}</view>
+      </view>
+    </view>
+  </modal>
+</view>

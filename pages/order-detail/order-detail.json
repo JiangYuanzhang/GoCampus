@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "modal":"../../components/custom-modal/custom-modal"
+  },
+  "navigationBarTitleText":"打印订单"
+}

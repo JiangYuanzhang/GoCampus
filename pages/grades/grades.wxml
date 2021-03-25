@@ -1,0 +1,35 @@
+<view class="head">
+	<view class="head-title">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{semester}}">
+  {{semester[index]}}
+  </picker>
+  </view>
+	<image src="/images/me/pointer.png" class="head-image"></image>
+</view>
+<!-- 绩点和科目数 -->
+<view class="sum">
+	<view class="sum-study">
+		<!-- <image src="/images/历史数据.png"></image> -->
+		学分绩点：{{study}}
+	</view>
+	<view class="sum-study-length">
+		<!-- <image src="/images/历史数据.png"></image> -->
+		学科数目： {{subj.length}}
+	</view>
+</view>
+<view class="table_head">
+	<view class="table_head_index">序号</view>
+	<view class="table_head_numb">课程编号</view>
+	<view>课程名称</view>
+	<view class="table_head_credie">学分</view>
+	<view class="table_head_score">分数</view>
+</view>
+<view class="table" wx:for="{{subj}}" wx:key="name">
+	<view class="subject" style="{{index%2==0 ? 'background-color: #f5f6fa;':''}}">
+		<view class="order">{{index+1}}</view>
+		<view class="numbe">{{item.numb}}</view>
+		<view class="sub">{{item.name}}</view>
+		<view class="credi">{{item.credie}}</view>
+		<view class="scor">{{item._score}}</view>
+	</view>
+</view>

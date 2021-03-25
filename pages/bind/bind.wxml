@@ -1,0 +1,23 @@
+<!-- 主面板 -->
+<view class="main">
+	<!-- 标题 -->
+	<view class="title">绑定学号</view>
+	<!-- 学号输入框 -->
+	<view class="form-group">
+		<view class="label">学号</view>
+		<input class="input" type="text" bindinput="inputUsername"></input>
+	</view>
+	<!-- 密码输入框 -->
+	<view class="form-group">
+		<view class="label">密码</view>
+		<input class="input" password bindinput="inputPassword"></input>
+	</view>
+	<!--用户协议-->
+	<view class="proto">
+	<view class="protocol" hover-class="active" bindtap="hasUserAgree" wx:if="{{!userAgree}}"><image src="/images/me/disagree.png"></image>阅读并同意</view>
+	<view class="protocol" hover-class="active" bindtap="hasUserdisAgree" wx:if="{{userAgree}}"><image src="/images/me/agree.png" ></image>我已阅读并同意</view>
+	<navigator url="/pages/protocol/protocol" hover-class="active">《用户协议》</navigator>
+	</view>
+	<!-- 提交按钮 -->
+	<view class="submit-btn" hover-class="active" bindtap="bind">绑定</view>
+</view>

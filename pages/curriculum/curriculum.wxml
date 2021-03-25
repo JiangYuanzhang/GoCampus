@@ -1,0 +1,29 @@
+<view class="timetable">
+	<view class="head">
+		<view class="head-title">
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{week}}">
+				{{week[index]}}
+			</picker>	
+		</view>
+		
+	</view>
+	<view class='top'>
+		<view wx:for="{{['一','二','三','四','五','六','日']}}" wx:key="*this" class='top-text'>周{{item}}</view>
+	</view>
+	<view class="content">
+		<view class="left">
+			<view wx:for="{{['1','2','3','4','5','6','7','8','9','10']}}" wx:key="*this" class='left-text'>{{item}}</view>
+		</view>
+		<view wx:if="{{hastimetable}}">
+			<view wx:for="{{results}}" wx:key="*this">
+				<view class="result" style="margin-left:{{(item[4]-1)*103}}rpx;margin-top:{{(item[5][0]-1)*140+35}}rpx;background-color:{{colorArrays[index%8]}}">
+					<view class="name">{{item[1]}}</view>
+					<view class="classroom">{{item[3]}}</view>
+				</view>
+			</view>
+		</view>
+		<view wx:else="{{!hastimetable}}">
+			<view class="btn" bindtap="btnclick">从教务系统获取课表</view>
+		</view>
+	</view>
+</view>

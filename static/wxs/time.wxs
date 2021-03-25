@@ -1,0 +1,9 @@
+function secondsFormat(seconds) {
+  var day = parseInt(seconds/86400);
+  var hou = parseInt((seconds-86400*day)/3600);
+  var min = parseInt((seconds-86400*day-3600*hou)/60);
+  var sec = seconds % 60;
+  return (day > 0 ? day + "天" : "") + (hou > 0 ? hou + "小时" : "") + (min > 0 ? min + "分钟" : "") + (sec > 0 ? sec + "秒" : "");
+}
+
+module.exports.secondsFormat = secondsFormat;

@@ -1,0 +1,33 @@
+<!--pages/messages/messages.wxml-->
+<view class="padding-sm bg-white">
+	<view class="padding-sm" wx:for="{{messages}}" wx:for-item="message" wx:for-index="index" wx:key="index">
+		<!-- 头像、昵称和操作时间 -->
+		<view class="flex">
+			<!-- 头像 -->
+			<view class="cu-avatar round lg" style="background-image:url({{message.operator.avatar_url}})"></view>
+			<view class="flex-sub text-grey padding-left-sm">
+				<view class="text-black">
+					{{message.operator.nick_name}}
+				</view>
+				<view class="text-grey text-sm padding-top-sm">
+					{{message.operate_time}}
+				</view>
+			</view>
+		</view>
+
+		<!-- 操作的内容 -->
+		<navigator url="../post-detail/post-detail?post_id={{message.host_post}}">
+			<view class="bg-gray margin-top radius padding-sm flex shadow-warp">
+				<!-- 操作的名称 -->
+				<text class="padding-right-sm text-main">
+				{{messageTypes[message.type]+((message.type!=2&&message.type!=3)?':':'')}}
+				</text>
+				<!-- 操作的内容 -->
+				<text wx:if="{{message.type!=2&&message.type!=3}}" class="text-black">
+				{{message.content}}
+				</text>
+			</view>
+		</navigator>
+
+	</view>
+</view>

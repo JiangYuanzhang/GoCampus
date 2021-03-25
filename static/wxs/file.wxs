@@ -1,0 +1,11 @@
+/**
+ * 显示文件大小，将B逐步转换成KB、GB等
+ */
+function showFileSize(size) {
+  if (size >= 1099511627776) return (size / 1099511627776).toFixed(1) + 'TB';
+  else if (size >= 1073741824) return (size / 1073741824).toFixed(1) + 'GB';
+  else if (size >= 1048576) return (size / 1048576).toFixed(1) + 'MB';
+  else if (size >= 1024) return (size / 1024).toFixed(1) + 'KB';
+  else return size + 'B';
+};
+module.exports.showFileSize = showFileSize;

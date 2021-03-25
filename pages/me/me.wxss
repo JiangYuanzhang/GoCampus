@@ -1,0 +1,254 @@
+/*解决与colorui的样式冲突*/
+view,
+scroll-view,
+swiper,
+button,
+input,
+textarea,
+label,
+navigator,
+image {
+	box-sizing: content-box;
+}
+
+/* 登录层 */
+.login-mask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 9999;
+	padding: 0 50rpx 60px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+}
+
+.login-wrapper {
+	width: 100%;
+	padding: 50rpx;
+	box-sizing: border-box;
+	background-color: #ffffff;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-mask .logo {
+	display: block;
+	width: 100px;
+	height: 100px;
+	margin-bottom: 20px;
+}
+
+.login-mask .login {
+	display: block;
+	width: auto;
+	background: #5134c2;
+	color: #ffffff;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+}
+
+/* 导航条样式 */
+.nav-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 0 50rpx 10px;
+	box-sizing: border-box;
+	font-size: 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #ffffff;
+	z-index: 1000;
+}
+
+/* 导航条下边框 */
+.nav-bar .nav-bar-border {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-color: rgba(0, 0, 0, 0.33);
+	transform: scaleY(0.3);
+}
+
+/* 用户信息 */
+.user {
+	width: 100%;
+	height: 200px;
+	position: relative;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+}
+
+.user::after {
+	content: '';
+	display: block;
+	width: 300%;
+	height: 100%;
+	background: linear-gradient(to bottom, #5134c2, #7154e2);
+	border-radius: 0 0 50% 50%;
+	position: absolute;
+	top: 0;
+	left: -100%;
+	z-index: -100;
+}
+
+/* 用户头像 */
+.user .avatar {
+	display: block;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background: #fefefe;
+}
+
+/* 用户位置 */
+.user .location {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-top: 5px;
+	font-size: 12px;
+}
+
+.user .location .loc-icon {
+	display: block;
+	width: 12px;
+	height: 12px;
+	margin-right: 5px;
+}
+
+/* 学生信息 */
+.bindInfo {
+	margin: -50px 50rpx 0;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 0 50rpx rgba(0, 0, 0, 0.1);
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 25px;
+	z-index: 100;
+}
+
+/* 绑定按钮 */
+.bindInfo .bind-btn {
+	display: flex;
+	background-color: #ffffff;
+	flex-direction: row;
+	align-items: center;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	transition: opacity .3s;
+	z-index: 100;
+	justify-content: center;
+}
+
+.bindInfo .bind-btn.active {
+	opacity: 0.5;
+}
+
+/* 提示 */
+.bindInfo .tip {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 5px;
+	font-size: 12px;
+	color: #999999;
+	line-height: 20px;
+}
+
+.bindInfo .bindInfo-wrapper {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	font-size: 12px;
+	color: #999999;
+	line-height: 20px;
+}
+
+/* 菜单列表样式 */
+.list-item {
+	display: block;
+	padding: 0 50rpx;
+	box-sizing: border-box;
+	height: 60px;
+	background: #ffffff;
+	transition: background .3s;
+	position: relative;
+	overflow: hidden;
+}
+
+.list-item::after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 750rpx;
+	height: 750rpx;
+	left: calc(50% - 375rpx);
+	top: calc(50% - 375rpx);
+	opacity: 0;
+	border-radius: 50%;
+	transform: scale(1.1);
+	transition: opacity .2s;
+	background-color: #666;
+}
+
+.list-item.active::after {
+	opacity: .3;
+	animation-name: wave;
+	animation-duration: .5s;
+}
+
+@keyframes wave {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(1.1);
+	}
+}
+
+.list-item .item-inner {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.list-item .item-inner .item-lab {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	color: #333333;
+	font-size: 14px;
+	line-height: 60px;
+}
+
+.list-item image {
+	display: block;
+	height: 24px;
+	width: 24px;
+	border-radius: 6px;
+}

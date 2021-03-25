@@ -1,0 +1,20 @@
+/* pages/order-detail/order-detail.wxss */
+
+page {
+  background-color: #f1f1f1;
+}
+
+.long-text {
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-line;
+}
+
+.padding-xxl {
+  padding-top: 120rpx;
+  padding-bottom: 120rpx;
+}
+
+.radius-lg {
+  border-radius: 20rpx;
+}

@@ -1,0 +1,123 @@
+<!-- 登录层 -->
+<!-- 导航条 -->
+<view class="nav-bar" style="padding-top: {{nav.paddingTop + 'px'}}; opacity: {{nav.opacity}}">
+  <!-- 导航条标题 -->
+  <view class="title" style="line-height: {{nav.contentHeight + 'px'}}">我的</view>
+  <!-- 导航条下边框 -->
+  <view class="nav-bar-border"></view>
+</view>
+<!-- 主内容区 -->
+<view class="main" style="overflow: hidden; padding-bottom: 60px">
+  <!-- 用户信息 -->
+  <view class="user" style="padding-top: {{nav.height + 20 + 'px'}}">
+    <image class="avatar" src="{{userInfo.avatarUrl ? userInfo.avatarUrl : '/images/me/avatar.png'}}"></image>
+    <!-- 用户名 -->
+    <view class="nickName" style="padding-top: 10px">
+      {{userInfo.nickName ? userInfo.nickName : '用户名'}}
+    </view>
+    <!-- 当前位置 -->
+    <view class="location">
+      <image class="loc-icon" src="/images/me/location.png"></image>
+      {{location ? location : '未定位'}}
+      <view style="font-size: 12px; color: #cccccc; margin-left: 5px" bindtap="fixLocation">
+        重新定位
+      </view>
+    </view>
+  </view>
+  <!-- 学生信息 -->
+  <view class="bindInfo">
+    <!-- 绑定跳转 -->
+    <button wx:if="{{!studentInfo.bind}}" class="bind-btn" hover-class="none" bindgetuserinfo="login" open-type="getUserInfo">
+      <image src="/images/me/bind.png" style="display: block; width: 14px; height: 14px; margin-right: 5px"></image>
+      立即绑定学号
+    </button>
+    <!-- 学生信息 -->
+    <block wx:else>
+      <!-- 提示 -->
+      <view class="tip">
+        <image src="/images/me/tip.png" style="display: block; height: 12px; width: 12px; margin-right: 5px"></image>
+        提示：可下拉刷新绑定数据
+      </view>
+      <view class="bindInfo-wrapper">
+        <view>姓名：{{studentInfo.info.name}}</view>
+        <view>学号：{{studentInfo.info.studentID}}</view>
+        <view>学院：{{studentInfo.info.college}}</view>
+        <view>专业：{{studentInfo.info.profession}}</view>
+        <view>班级：{{studentInfo.info.class}}</view>
+        <view style="color: #5134c2; display: flex; flex-direction: row; align-items: center" bindtap="unbind">
+          <image src="/images/me/unbind.png" style="display: block; height: 10px; width: 10px; margin-right: 5px"></image>
+          解除绑定
+        </view>
+      </view>
+    </block>
+  </view>
+  <!-- 菜单列表 -->
+  <view class="menu-list" style="padding: 50rpx 0">
+    <!-- 菜单列表项 -->
+    <navigator class="list-item" hover-class="active" url="../messages/messages">
+      <view class="item-inner">
+        <view class="item-lab">
+          <!-- 图标 -->
+          <image src="/images/me/msg.png"></image>
+          <!-- 文本 -->
+          <view style="margin-left: 30rpx">
+            我的消息
+            <view wx:if="{{unreadMessageNum!=0}}" class="cu-tag round bg-red text-sm sm">{{unreadMessageNum}}</view>
+          </view>
+        </view>
+        <!-- 箭头 -->
+        <image src="/images/me/pointer.png"></image>
+      </view>
+    </navigator>
+    <!-- 我的帖子 -->
+    <navigator class="list-item" hover-class="active" url="../my-posts/my-posts">
+      <view class="item-inner">
+        <view class="item-lab">
+          <!-- 图标 -->
+          <image src="/images/me/posts.png"></image>
+          <!-- 文本 -->
+          <view style="margin-left: 30rpx">我的帖子</view>
+        </view>
+        <!-- 箭头 -->
+        <image src="/images/me/pointer.png"></image>
+      </view>
+    </navigator>
+    <!--<navigator class="list-item" hover-class="active" url="../print-history/print-history">
+      <view class="item-inner">
+        <view class="item-lab">
+         
+          <image src="/images/me/print-orders.png"></image>
+          
+          <view style="margin-left: 30rpx">打印历史</view>
+        </view>
+        
+        <image src="/images/me/pointer.png"></image>
+      </view>
+    </navigator>-->
+    <navigator class="list-item" hover-class="active" url="../about/about">
+      <view class="item-inner">
+        <view class="item-lab">
+          <!-- 图标 -->
+          <image src="/images/me/about.png"></image>
+          <!-- 文本 -->
+          <view style="margin-left: 30rpx">关于应用</view>
+        </view>
+        <!-- 箭头 -->
+        <image src="/images/me/pointer.png"></image>
+      </view>
+    </navigator>
+    <view class="list-item" hover-class="active" bindtap="openConfirm">
+      <view class="item-inner">
+        <view class="item-lab">
+          <!-- 图标 -->
+          <image src="/images/me/clear.png"></image>
+          <!-- 文本 -->
+          <view style="margin-left: 30rpx">清除缓存</view>
+        </view>
+        <!-- 箭头 -->
+        <image src="/images/me/pointer.png"></image>
+      </view>
+    </view>
+    
+  </view>
+</view>

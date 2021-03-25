@@ -1,0 +1,37 @@
+<!-- 主内容区 -->
+<view>
+  <!-- 显示当前订单信息的横条 -->
+  <view wx:if="{{currentOrderInfo.state}}" bindtap="tapNewestOrder" class="bg-purple light cu-list menu animation-slide-left text-sm">
+    <view class="cu-item">
+      <view class="content">
+        <view style="margin-left: 30rpx">
+          当前打印订单：{{currentOrderInfo.shop_name}}  {{currentOrderInfo.state}}
+        </view>
+      </view>
+      <view class="action">
+        <!-- 箭头 -->
+        <text class="cuIcon-right"></text>
+      </view>
+    </view>
+  </view>
+  <!-- 显示店铺的信息 -->
+  <view class="cu-list menu">
+    <view class="cu-item solids-bottom" wx:for="{{shops}}" wx:for-item="shop" wx:for-index="index" wx:key="index">
+      <view class="content flex padding-top-sm padding-bottom-sm shadow">
+        <!-- 商铺的头像 -->
+        <view class=" flex-sub round lg text-center">
+          <view class="cu-avatar radius" style="background-image:url({{shop.avatar?shop.avatar:'https://tva1.sinaimg.cn/large/007S8ZIlgy1gdz1mmcfd3j30rl0rbgnv.jpg'}})"></view>
+        </view>
+        <view class="flex-fifth">
+          <view class="text-main text-bold">{{shop.name}}</view>
+          <view class="text-sm text-grey">{{shop.location}}</view>
+        </view>
+      </view>
+      <view class="action">
+        <navigator url="../shop-home-page/shop-home-page?shop={{shop.name}}">
+          <view class="cu-tag bg-purple light round">进入店铺</view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

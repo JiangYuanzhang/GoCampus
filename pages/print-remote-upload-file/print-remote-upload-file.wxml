@@ -1,0 +1,25 @@
+<wxs module="time" src="../../static/wxs/time.wxs"></wxs>
+<view>
+  <view class="margin padding bg-white shadow-blur radius">
+    <view class="text-lg">
+      <view class="cuIcon-link text-bold margin-top-sm"> 
+        请在电脑浏览器上输入并访问如下链接地址：
+      </view>
+      <view bindtap="copyText" data-text="{{webPageAddress}}" class="link text-blue margin-top" style="text-direction">
+        <text decode="{{true}}">{{webPageAddress}}&nbsp;(点击可以复制)</text>
+      </view>
+      <view class="cuIcon-lock text-bold margin-top padding-top solids-top"> 
+        在网页内输入如下的上传码，上传文件后确认即可：
+      </view>
+      <!-- 上传码 -->
+      <view class="text-xsl text-center margin-lg text-grey light code">{{code}}</view>
+      <!-- 确认上传 -->
+      <view class="text-center margin padding">
+        <button bindtap="getRemoteUploadFile" class="cu-btn bg-main lg shadow-blur margin-bottom round padding text-center">我已上传文件</button>
+        <!-- 倒计时 -->
+        <view wx:if="{{expire!=0}}" class="text-gray">请在{{time.secondsFormat(expire)}}内点击本按钮</view>
+        <view wx:else>上传码已过期</view>
+      </view>
+    </view>
+  </view>
+</view>

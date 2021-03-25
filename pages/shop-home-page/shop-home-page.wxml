@@ -1,0 +1,187 @@
+<!-- 处理文件大小显示的wxs脚本 -->
+<wxs module="fileWxsMoudle" src="../../static/wxs/file.wxs"></wxs>
+<!-- 主内容区 -->
+<view style="margin-bottom:{{operationBarHeight}}px;">
+  <!-- 店铺轮播图 -->
+  <view class="bg-white shadow animation-scale-up">
+    <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+      <swiper-item wx:for="{{shopSwipers}}" wx:key="index">
+        <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+        <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 店铺简介 -->
+  <view class="flex shadow radius bg-white padding animation-scale-up" id="shop-card">
+    <view class="flex-sub text-center justify-center">
+      <view class="cu-avatar round" style="background-image:url({{shopDetail.avatar?shopDetail.avatar:'https://tva1.sinaimg.cn/large/007S8ZIlgy1gdz1mmcfd3j30rl0rbgnv.jpg'}})"></view>
+    </view>
+    <view class="flex-fifth">
+      <view class="text-main text-bold">{{shopDetail.name}}</view>
+      <view class="text-sm text-grey">{{shopDetail.location}}</view>
+    </view>
+  </view>
+  <!-- 商品列表 -->
+  <view class="VerticalBox animation-scale-up" style="height:{{scrollHeight}}px">
+    <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:100%;">
+      <view class="cu-item {{index==selectedTab?'text-main cur':''}}" wx:for="{{goods.tags}}" wx:key="index" bindtap='tabSelect' data-id="{{index}}">
+        {{item}}
+      </view>
+    </scroll-view>
+    <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:100%;margin-bottom:30px;" scroll-into-view="main-{{selectedTab}}" bindscroll="VerticalMain">
+      <view class="padding-top padding-lr shadow" wx:for="{{goods.goods}}" wx:for-index="index2" wx:key id="main-{{index2}}" wx:key="index2">
+        <!-- tab标题 -->
+        <view class='cu-bar solid-bottom bg-white'>
+          <view class='action'>
+            <text class='cuIcon-title text-main'></text>
+            {{goods.tags[index2]}}
+          </view>
+        </view>
+        <!-- tab内包含的商品 -->
+        <view class="cu-list menu-avatar radius shadow">
+          <view class="cu-item {{index==0?'solid-top':''}} solid-bottom" wx:for="{{item}}" wx:for-item="good" wx:for-index="index" wx:key="index">
+            <view class="cu-avatar round lg" style="background-image:url({{good.avatar?good.avatar:shopDetail.avatar}});"></view>
+            <view class="content">
+              <view class="text-main long-text">{{good.name}}</view>
+              <view class="text-gray text-sm flex">
+                <text class="text-cut">￥{{good.price}}/{{good.unit}}</text>
+              </view>
+            </view>
+            <view class="text-center">
+              <view class="cu-tag bg-purple light round margin-right" data-tag="{{index2}}" data-index="{{index}}" data-good="{{good.id}}" bind:tap="tapAddCart">
+                <text class="cuIcon-cart"></text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 如果需要上传文件，则加入购物车前的编辑 -->
+  <modal show="{{beforeAddCartEdit}}" bottom show-cancel hidemodalauto="{{false}}" title="个性化" cancel-text="取消" confirm-text="确认" bind:confirm="addGoodToCart" bind:hidemodal="hideModal" data-index="{{edit.index}}" data-good="{{edit.good}}" data-tab="{{edit.tab}}">
+    <view class="animation-scale-up" slot="content-bottom">
+
+      <view class="text-center text-main">
+        <text class="cuIcon-info">个性化选项</text>
+      </view>
+
+      <!-- 数量 -->
+      <view class="flex margin-top">
+        <view class="flex-sub text-main">数量</view>
+        <view class="flex-twice">
+          <view class="flex">
+            <view class="flex-fifth">
+              <input type="digit" class="shadow bg-gray radius" value="{{num}}" bindinput="numInput"/>
+            </view>
+            <view class="flex-sub">
+              <text>{{edit.unit}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 其他商品要求的数据 -->
+      <view class="flex margin-top" wx:for="{{edit.params}}" wx:for-index="index" wx:key="index">
+        <view class="flex-sub text-main">{{item.name}}</view>
+        <view class="flex-twice">
+          <!-- 输入 -->
+          <input wx:if="{{item.type=='input'}}" type="text" class="shadow bg-gray radius" placeholder="{{item.info}}" data-name="{{item.name}}" bindinput="paramsInput" />
+          <!-- 选择 -->
+          <picker wx:else mode="selector" range="{{item.info}}" value="{{item.info[edit.choosed]}}" data-name="{{item.name}}" data-index="{{index}}" bindchange="paramsChoose">
+            <view class="shadow bg-gray radius" style="width:100%;">{{item.info[edit.choosed]}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="text-center text-main margin-top">
+        <text class="cuIcon-info">附件上传</text>
+      </view>
+
+      <view wx:if="{{file.fileName}}" class="bg-main margin-sm padding radius">
+        <view class="flex">
+          <view class="flex-sub text-main">
+            <view class="cu-avatar bg-main" style="background-image:url(../../images/print/file.png)"></view>
+          </view>
+          <view class="flex-fourth text-left">
+            <view class="text-white text-bold cuIcon-file"> {{file.fileName}}</view>
+            <view class="text-xs text-white cuIcon-link"> 附件：{{fileWxsMoudle.showFileSize(file.fileSize)}}</view>
+          </view>
+        </view>
+        <view class="text-xs cuIcon-info margin-top-sm"> 重新上传即可覆盖。</view>
+      </view>
+
+      <view wx:else class="text-center text-main margin-top">
+        <text class="text-black text-bold text-sm">加入本商品到购物车需要上传附件，您还未上传附件。</text>
+      </view>
+
+      <view class="margin-top">
+        <button class="cu-btn round bg-purple light margin-top" bind:tap="chooseFile" data-mode="1">
+          上传微信聊天文件
+        </button>
+        <button class="cu-btn round bg-purple light margin-top" bind:tap="chooseFile" data-mode="0">
+          上传手机本地文件
+        </button>
+        <button class="cu-btn round bg-purple light margin-top" bind:tap="chooseFile" data-mode="2">
+          上传电脑文件
+        </button>
+      </view>
+    </view>
+  </modal>
+  <!-- 购物车 -->
+  <modal show="{{showCarts}}" bottom show-cancel title="购物车" cancel-text="关闭" confirm-text="提交" bind:confirm="commitOrder" bind:hidemodal="hideModal">
+    <view class="animation-scale-up" slot="content-bottom">
+      <!-- 商品条目列表 -->
+      <view wx:if="{{cartNum!=0}}" class="cu-list menu-avatar">
+        <view class="cu-item solids-bottom" wx:for="{{carts}}" wx:for-index="index" wx:key="index">
+          <!-- 商品图标 -->
+          <view class="cu-avatar round lg" style="background-image:url({{item.good.avatar?item.good.avatar:shopDetail.avatar}});"></view>
+          <!-- 商品信息 -->
+          <view class="content">
+            <view class="text-main long-text">{{item.good.name}}</view>
+            <view class="text-gray text-sm flex">
+              <text class="text-cut">{{item.good.price}}元/{{item.good.unit}} × {{item.num}} {{item.good.unit}}</text>
+            </view>
+          </view>
+          <!-- 价格小计 -->
+          <view class="text-center">
+            <text class="text-main text-bold padding-right-sm">￥{{item.price}}</text>
+            <view class="cu-tag bg-purple light round margin-right" data-cartid="{{index}}" bind:tap="popCart">
+              <text class="cuIcon-delete"></text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="nodata padding">
+        <image class="nodata-image" src="/images/qa/no-data.png"></image>
+			  <text>你还没有选任何商品哦</text>
+      </view>
+      <!-- 底部操作条 -->
+      <view class="bg-white">
+        <view class="flex solids-top padding-top">
+          <view class="flex-sub justify-center">
+            <text class="cuIcon-money padding-right-sm text-bold">合计：</text>
+            <text class="text-main">{{sumPrice}} 元</text>
+          </view>
+          <view class="flex-sub">
+            <button class="cu-btn bg-main round shadow-blur" bind:tap="commitOrder">提交订单</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </modal>
+  <!-- 底部操作 -->
+  <view class="cu-bar bg-white tabbar border shop fixed-bottom shadow" id="operation-bar" style="width:100%">
+    <button class="action bg-white" open-type="contact">
+      <view class="cuIcon-service text-main"></view>
+      客服
+    </button>
+    <view class="action" bind:tap="tapCart">
+      <view class="cuIcon-cart">
+        <view wx:if="{{cartNum!=0}}" class="cu-tag badge">{{cartNum}}</view>
+      </view>
+      购物车
+    </view>
+    <view class="btn-group text-right">
+      <button class="cu-btn bg-main round shadow-blur" bind:tap="commitOrder">提交订单</button>
+    </view>
+  </view>
+</view>

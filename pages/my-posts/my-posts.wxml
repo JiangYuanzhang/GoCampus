@@ -1,0 +1,60 @@
+<!-- 主内容区 -->
+<view class="main" style="padding-top: {{navBar.height}}px">
+	<scroll-view class="list-wrapper" scroll-y bindscrolltolower="getMore">
+		<!-- 无数据显示界面 -->
+		<view wx:if="{{posts.dataList.length == 0}}" class="no-data">
+			<image src="/images/qa/no-data.png"></image>
+			<text>没有数据吗</text>
+		</view>
+		<!-- 帖子列表 -->
+		<view wx:else class="post-list" style="width: 100%; padding: 20px 40rpx; box-sizing: border-box">
+			<block wx:for="{{posts.dataList}}" wx:for-item="post" wx:for-index="postIndex" wx:key="index">
+				<!-- 帖子 -->
+				<navigator url="/pages/post-detail/post-detail?post_id={{post.post_id}}" class="post" hover-class="none" style="{{postIndex == 0 ? 'margin-top: 0' : ''}}">
+					<!-- 发帖用户 -->
+					<view class="post-sender">
+						<!-- 用户头像 -->
+						<image class="sender-avatar" src="{{post.sender_info.avatar_url}}"></image>
+						<!-- 用户信息 -->
+						<view class="sender-info">
+							<!-- 用户名 -->
+							<view class="sender-name">{{post.sender_info.nick_name}}</view>
+							<!-- 发帖时间 -->
+							<view class="send-time">{{post.release_time}}</view>
+						</view>
+					</view>
+					<!-- 帖子内容 -->
+					<view class="post-content">{{post.content}}</view>
+					<!-- 图片列表 -->
+					<view class="img-list" wx:if="{{post.images ? true : false}}">
+						<image mode="aspectFill" wx:for="{{post.images}}" wx:key="index" wx:for-item="img" wx:for-index="imgIndex" data-url="{{img.url}}" data-urlList="{{post.images}}" catchtap="viewImage" src="{{img.url}}" style="width: {{(post.images.length >= 3 ? 190 : (590 - (post.images.length - 1) * 10)/post.images.length)}}rpx; height: {{(post.images.length >= 3 ? 190 : (590 - (post.images.length - 1) * 10)/post.images.length)}}rpx; {{post.images.length >= 3 ? ((imgIndex + 1) % 3 == 0 ? 'margin-right: 0' : '') : (imgIndex == post.images.length - 1 ? 'margin-right: 0' : '')}}"></image>
+					</view>
+					<!-- 版块 -->
+					<view class="topic"># {{post.topic}}</view>
+					<!-- 操作区 -->
+					<view class="oper-bar" style="justify-content: {{post.sent_by_me ? 'space-between' : 'flex-end'}}">
+						<!-- 删除按钮 -->
+						<view wx:if="{{post.sent_by_me}}" class="del-btn" hover-class="active" catchtap="deletePost" data-index="{{postIndex}}">删除</view>
+						<view class="oper-bar-wrapper">
+							<!-- 浏览 -->
+							<view class="oper-item">
+								<image src="/images/qa/view.png"></image>{{post.viewed}}
+							</view>
+							<!-- 评论 -->
+							<view class="oper-item">
+								<image src="/images/qa/comment.png"></image>{{post.comments_num ? post.comments_num : '评论'}}
+							</view>
+							<!-- 点赞 -->
+							<view class="oper-item" data-index="{{postIndex}}" catchtap="like">
+								<image src="{{'/images/qa/' + (post.liked ? 'liked.png' : 'like.png')}}"></image>{{post.likes_num ? post.likes_num : '赞'}}
+							</view>
+						</view>
+					</view>
+				</navigator>
+			</block>
+			<view wx:if="{{posts.hasOver}}" class="no-more">
+				<image src="/images/qa/no-more.png"></image>没有更多了~
+			</view>
+		</view>
+	</scroll-view>
+</view>

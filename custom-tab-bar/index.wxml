@@ -1,0 +1,12 @@
+<!-- tab-bar组件 -->
+<cover-view class="tab-bar">
+	<!-- tab-bar组件上边框 -->
+	<cover-view class="tab-bar-border"></cover-view>
+	<!-- tab项 -->
+	<cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+		<!-- tab项图标 -->
+		<cover-image class="tab-icon" src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
+		<!-- tab项文本 -->
+		<cover-view class="tab-text" style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</cover-view>
+	</cover-view>
+</cover-view>
